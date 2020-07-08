@@ -5,11 +5,11 @@ import java.util.regex.Pattern;
 
 import by.svirski.lesson6.model.validator.AbstractValidator;
 
-public class ValidatorStrings extends AbstractValidator {
+public class ValidatorDateImpl extends AbstractValidator {
 
 	@Override
 	public boolean validate(String value) {
-		Pattern pattern = Pattern.compile(REGEX_STRING);
+		Pattern pattern = Pattern.compile(REGEX_DATE);
 		Matcher matcher = pattern.matcher(value);
 		return matcher.matches();
 	}

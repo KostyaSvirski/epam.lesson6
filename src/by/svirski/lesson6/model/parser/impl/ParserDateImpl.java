@@ -1,13 +1,15 @@
-package by.svirski.lesson6.model.parser;
+package by.svirski.lesson6.model.parser.impl;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import by.svirski.lesson6.model.exception.CustomParseException;
+import by.svirski.lesson6.model.parser.CustomParserInter;
 
-public class ParserDate {
+public class ParserDateImpl implements CustomParserInter<Calendar>{
 
-	public static Calendar parseDate(String sourceValue) throws CustomParseException {
+	@Override
+	public Calendar parse(String sourceValue) throws CustomParseException {
 		String[] values = sourceValue.split(".");
 		if (Integer.parseInt(values[2]) <= 2020 && Integer.parseInt(values[2]) >= 1800) {
 			if (Integer.parseInt(values[1]) > 0 && Integer.parseInt(values[2]) <= 12) {
@@ -20,5 +22,7 @@ public class ParserDate {
 		}
 		throw new CustomParseException("error in parsing of date"); 
 	}
+	//TODO 09.07.2020 0:49 correct number in date
+	
 
 }

@@ -25,6 +25,13 @@ public class StorageOfBooks {
 		return instance;
 	}
 	
+	public static StorageOfBooks getInstance() throws CustomStorageException {
+		if(instance == null) {
+			throw new CustomStorageException("storage is not exist");
+		} 
+		return instance;
+	}
+	
 	private static boolean isExist() {
 		return (instance != null) ? true : false;
 	}
@@ -42,15 +49,10 @@ public class StorageOfBooks {
 		return false;
 	}
 	
-	public boolean removeBookFromStorage(CustomBook book) throws CustomStorageException {
+	public boolean removeBookFromStorage(CustomBook book) {
 		if(book != null) {
-			if(listOfBooks.indexOf(book) != -1) {
-				listOfBooks.remove(book);
-				return true;
-				
-			} else {
-				throw new CustomStorageException("book not found");
-			}
+			listOfBooks.remove(book);
+			return true;
 		}
 		return false;
 	}
