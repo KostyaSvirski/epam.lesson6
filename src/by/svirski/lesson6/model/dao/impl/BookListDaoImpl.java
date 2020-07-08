@@ -10,9 +10,12 @@ import by.svirski.lesson6.model.entity.CustomBook;
 import by.svirski.lesson6.model.entity.StorageOfBooks;
 import by.svirski.lesson6.model.exception.CustomCreationException;
 import by.svirski.lesson6.model.exception.CustomDaoException;
+import by.svirski.lesson6.model.exception.CustomParseException;
 import by.svirski.lesson6.model.exception.CustomStorageException;
 import by.svirski.lesson6.model.exception.CustomValidationException;
+import by.svirski.lesson6.model.parser.impl.ParserNumberImpl;
 import by.svirski.lesson6.model.service.sorting.CustomSort;
+import by.svirski.lesson6.model.validator.impl.ValidatorNumberImpl;
 
 //TODO 08.07.2020 22:43 dao
 public class BookListDaoImpl implements BookListDaoInter {
@@ -66,8 +69,21 @@ public class BookListDaoImpl implements BookListDaoInter {
 	}
 
 	@Override
-	public TreeSet<CustomBook> sortByTag(int typeOfSorting) throws CustomDaoException {
+	public TreeSet<CustomBook> sortByTag(String typeOfSortingStr) throws CustomDaoException {
 		try {
+			ValidatorNumberImpl validator = new ValidatorNumberImpl();
+			
+			ParserNumberImpl parser = new ParserNumberImpl();
+			int typeOfSorting;
+			try {
+				if(validator.validate(typeOfSortingStr)) {
+					typeOfSorting = parser.parse(typeOfSortingStr);					
+				} else {
+					throw new CustomDaoException("error in validation");
+				} 
+			} catch (CustomParseException e) {
+				throw new CustomDaoException("error in parsing: " + e.getMessage());
+			}
 			StorageOfBooks storage = StorageOfBooks.getInstance();
 			List<CustomBook> listToSort = storage.getListOfBooks();
 			TreeSet<CustomBook> sortedList;

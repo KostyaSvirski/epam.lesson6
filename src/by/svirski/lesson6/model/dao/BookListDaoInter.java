@@ -13,7 +13,7 @@ public interface BookListDaoInter {
 	StorageOfBooks createStorage(String capacity) throws CustomDaoException;
 	boolean addBook(String...parameters) throws CustomDaoException, CustomStorageException;
 	boolean removeBookById(int id) throws CustomDaoException;
-	TreeSet<CustomBook> sortByTag(int typeOfSorting) throws CustomDaoException ;
+	TreeSet<CustomBook> sortByTag(String typeOfSorting) throws CustomDaoException ;
 	List<CustomBook> findBookByTag(int tagToFind) throws CustomDaoException;
 	
 }
