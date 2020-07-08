@@ -8,7 +8,7 @@ import by.svirski.lesson6.model.validator.AbstractValidator;
 public class ValidatorStrings extends AbstractValidator {
 
 	@Override
-	protected boolean validate(String value) {
+	public boolean validate(String value) {
 		Pattern pattern = Pattern.compile(REGEX_STRING);
 		Matcher matcher = pattern.matcher(value);
 		return matcher.matches();

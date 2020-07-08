@@ -1,7 +1,7 @@
 package by.svirski.lesson6.model.entity;
 
 import java.util.Arrays;
-import java.util.Date;
+import java.util.Calendar;
 
 public class CustomBook {
 
@@ -11,7 +11,7 @@ public class CustomBook {
 	private String bookName;
 	private String[] authors;
 	private String genre;
-	private Date publishDate;
+	private Calendar publishDate;
 	private String publishingHouse;
 
 	public CustomBook() {
@@ -51,11 +51,11 @@ public class CustomBook {
 		this.genre = genre;
 	}
 
-	public Date getPublishDate() {
+	public Calendar getPublishDate() {
 		return publishDate;
 	}
 
-	public void setPublishDate(Date publishDate) {
+	public void setPublishDate(Calendar publishDate) {
 		this.publishDate = publishDate;
 	}
 
@@ -132,7 +132,7 @@ public class CustomBook {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Book [bookId=");
+		builder.append("CustomBook [bookId=");
 		builder.append(bookId);
 		builder.append(", bookName=");
 		builder.append(bookName);
@@ -142,13 +142,12 @@ public class CustomBook {
 		builder.append(genre);
 		builder.append(", publishDate=");
 		builder.append(publishDate);
-		builder.append(", publishHouse=");
+		builder.append(", publishingHouse=");
 		builder.append(publishingHouse);
 		builder.append("]");
 		return builder.toString();
 	}
 
-	
 	
 
 }

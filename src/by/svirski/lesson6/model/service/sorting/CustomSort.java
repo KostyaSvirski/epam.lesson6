@@ -4,6 +4,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
 
+import by.svirski.lesson6.model.comparator.BookAuthorComparator;
+import by.svirski.lesson6.model.comparator.BookIdComparator;
 import by.svirski.lesson6.model.comparator.BookNameComparator;
 import by.svirski.lesson6.model.comparator.GenreComparator;
 import by.svirski.lesson6.model.comparator.PublishDateComparator;
@@ -16,7 +18,8 @@ public enum CustomSort {
 
 		@Override
 		public TreeSet<CustomBook> sort(List<CustomBook> listToSort) {
-			return null;
+			Comparator<CustomBook> comp = new BookIdComparator();
+			return executeSorting(comp, listToSort);
 		}
 	},
 
@@ -25,7 +28,7 @@ public enum CustomSort {
 		@Override
 		public TreeSet<CustomBook> sort(List<CustomBook> listToSort) {
 			Comparator<CustomBook> comp = new BookNameComparator();
-			return sortingList(comp, listToSort);
+			return executeSorting(comp, listToSort);
 		}
 	},
 
@@ -33,8 +36,8 @@ public enum CustomSort {
 
 		@Override
 		public TreeSet<CustomBook> sort(List<CustomBook> listToSort) {
-			//TODO 08.07.2020 19:14 author sorting
-			return null;
+			Comparator<CustomBook> comp = new BookAuthorComparator();
+			return executeSorting(comp, listToSort);
 		}
 	},
 
@@ -43,7 +46,7 @@ public enum CustomSort {
 		@Override
 		public TreeSet<CustomBook> sort(List<CustomBook> listToSort) {
 			Comparator<CustomBook> comp = new GenreComparator();
-			return sortingList(comp, listToSort);
+			return executeSorting(comp, listToSort);
 		}
 	},
 
@@ -52,7 +55,7 @@ public enum CustomSort {
 		@Override
 		public TreeSet<CustomBook> sort(List<CustomBook> listToSort) {
 			Comparator<CustomBook> comp = new PublishDateComparator();
-			return sortingList(comp, listToSort);
+			return executeSorting(comp, listToSort);
 		}
 	},
 
@@ -61,13 +64,13 @@ public enum CustomSort {
 		@Override
 		public TreeSet<CustomBook> sort(List<CustomBook> listToSort) {
 			Comparator<CustomBook> comp = new PublishHouseComparator();
-			return sortingList(comp, listToSort);
+			return executeSorting(comp, listToSort);
 		}
 	};
 
 	public abstract TreeSet<CustomBook> sort(List<CustomBook> listToSort);
 
-	protected TreeSet<CustomBook> sortingList(Comparator<CustomBook> comp, List<CustomBook> listToSort) {
+	protected TreeSet<CustomBook> executeSorting(Comparator<CustomBook> comp, List<CustomBook> listToSort) {
 		TreeSet<CustomBook> sortedList = new TreeSet<CustomBook>(comp);
 		for (CustomBook book : listToSort) {
 			sortedList.add(book);
