@@ -26,17 +26,19 @@ public class StorageOfBooks {
 	}
 	
 	private static boolean isExist() {
-		return (instance != null) ? false : true;
+		return (instance != null) ? true : false;
 	}
 	
 	public boolean addBookToStorage(CustomBook book) throws CustomStorageException {
-		if(listOfBooks.contains(book)) {
-			throw new CustomStorageException("book is already exist");
-		}
-		if(book != null && listOfBooks.size() + 1 <= maxCountOfBooks) {
-			listOfBooks.add(book);
-			return true;
-		}
+		if(book != null) {			
+			if(listOfBooks.contains(book)) {
+				throw new CustomStorageException("book is already exist");
+			}
+			if(listOfBooks.size() + 1 <= maxCountOfBooks) {
+				listOfBooks.add(book);
+				return true;
+			}
+		} 
 		return false;
 	}
 	
