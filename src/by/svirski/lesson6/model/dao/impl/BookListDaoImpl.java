@@ -17,7 +17,7 @@ import by.svirski.lesson6.model.parser.impl.ParserNumberImpl;
 import by.svirski.lesson6.model.service.sorting.CustomSort;
 import by.svirski.lesson6.model.validator.impl.ValidatorNumberImpl;
 
-//TODO 08.07.2020 22:43 dao
+//TODO 09.07.2020 16:16 logic - move to service, work with entities - dao 
 public class BookListDaoImpl implements BookListDaoInter {
 
 	@Override
@@ -72,15 +72,15 @@ public class BookListDaoImpl implements BookListDaoInter {
 	public TreeSet<CustomBook> sortByTag(String typeOfSortingStr) throws CustomDaoException {
 		try {
 			ValidatorNumberImpl validator = new ValidatorNumberImpl();
-			
+
 			ParserNumberImpl parser = new ParserNumberImpl();
 			int typeOfSorting;
 			try {
-				if(validator.validate(typeOfSortingStr)) {
-					typeOfSorting = parser.parse(typeOfSortingStr);					
+				if (validator.validate(typeOfSortingStr)) {
+					typeOfSorting = parser.parse(typeOfSortingStr);
 				} else {
 					throw new CustomDaoException("error in validation");
-				} 
+				}
 			} catch (CustomParseException e) {
 				throw new CustomDaoException("error in parsing: " + e.getMessage());
 			}
@@ -88,34 +88,35 @@ public class BookListDaoImpl implements BookListDaoInter {
 			List<CustomBook> listToSort = storage.getListOfBooks();
 			TreeSet<CustomBook> sortedList;
 			switch (typeOfSorting) {
-			case 1: {
-				sortedList = CustomSort.BY_ID.sort(listToSort);
-				return sortedList;
+				case 1: {
+					sortedList = CustomSort.BY_ID.sort(listToSort);
+					break;
+				}
+				case 2: {
+					sortedList = CustomSort.BY_NAME.sort(listToSort);
+					break;
+				}
+				case 3: {
+					sortedList = CustomSort.BY_AUTHOR.sort(listToSort);
+					break;
+				}
+				case 4: {
+					sortedList = CustomSort.BY_GENRE.sort(listToSort);
+					break;
+				}
+				case 5: {
+					sortedList = CustomSort.BY_DATE.sort(listToSort);
+					break;
+				}
+				case 6: {
+					sortedList = CustomSort.BY_PUBLISHING_HOUSE.sort(listToSort);
+					break;
+				}
+				default: {
+					throw new CustomDaoException("not valid type of sorting");
+				}
 			}
-			case 2: {
-				sortedList = CustomSort.BY_NAME.sort(listToSort);
-				return sortedList;
-			}
-			case 3: {
-				sortedList = CustomSort.BY_AUTHOR.sort(listToSort);
-				return sortedList;
-			}
-			case 4: {
-				sortedList = CustomSort.BY_GENRE.sort(listToSort);
-				return sortedList;
-			}
-			case 5: {
-				sortedList = CustomSort.BY_DATE.sort(listToSort);
-				return sortedList;
-			}
-			case 6: {
-				sortedList = CustomSort.BY_PUBLISHING_HOUSE.sort(listToSort);
-				return sortedList;
-			}
-			default: {
-				throw new CustomDaoException("not valid type of sorting");
-			}
-			}
+			return sortedList;
 		} catch (CustomStorageException e) {
 			throw new CustomDaoException("error in storage: " + e.getMessage());
 		}
