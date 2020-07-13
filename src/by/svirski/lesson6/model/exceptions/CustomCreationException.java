@@ -1,4 +1,4 @@
-package by.svirski.lesson6.model.exception;
+package by.svirski.lesson6.model.exceptions;
 
 public class CustomCreationException extends Exception{
 

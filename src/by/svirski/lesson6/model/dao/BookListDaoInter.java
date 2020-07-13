@@ -1,19 +1,17 @@
 package by.svirski.lesson6.model.dao;
 
 import java.util.List;
-import java.util.TreeSet;
 
-import by.svirski.lesson6.model.entity.CustomBook;
-import by.svirski.lesson6.model.entity.StorageOfBooks;
-import by.svirski.lesson6.model.exception.CustomDaoException;
-import by.svirski.lesson6.model.exception.CustomStorageException;
+import by.svirski.lesson6.model.entities.CustomBook;
+import by.svirski.lesson6.model.entities.StorageOfBooks;
+import by.svirski.lesson6.model.exceptions.CustomDaoException;
+import by.svirski.lesson6.model.exceptions.CustomStorageException;
 
 public interface BookListDaoInter {
 	
 	StorageOfBooks createStorage(String capacity) throws CustomDaoException;
 	boolean addBook(String...parameters) throws CustomDaoException, CustomStorageException;
 	boolean removeBookById(int id) throws CustomDaoException;
-	TreeSet<CustomBook> sortByTag(String typeOfSorting) throws CustomDaoException ;
-	List<CustomBook> findBookByTag(int tagToFind) throws CustomDaoException;
+	List<CustomBook> sellectBookList() throws CustomDaoException;
 	
 }

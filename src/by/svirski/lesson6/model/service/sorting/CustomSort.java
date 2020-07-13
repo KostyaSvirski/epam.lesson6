@@ -4,17 +4,17 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
 
-import by.svirski.lesson6.model.comparator.BookAuthorComparator;
-import by.svirski.lesson6.model.comparator.BookIdComparator;
-import by.svirski.lesson6.model.comparator.BookNameComparator;
-import by.svirski.lesson6.model.comparator.GenreComparator;
-import by.svirski.lesson6.model.comparator.PublishDateComparator;
-import by.svirski.lesson6.model.comparator.PublishHouseComparator;
-import by.svirski.lesson6.model.entity.CustomBook;
+import by.svirski.lesson6.model.comparators.BookAuthorComparator;
+import by.svirski.lesson6.model.comparators.BookIdComparator;
+import by.svirski.lesson6.model.comparators.BookNameComparator;
+import by.svirski.lesson6.model.comparators.GenreComparator;
+import by.svirski.lesson6.model.comparators.PublishDateComparator;
+import by.svirski.lesson6.model.comparators.PublishHouseComparator;
+import by.svirski.lesson6.model.entities.CustomBook;
 
 public enum CustomSort {
 
-	BY_ID {
+	BY_ID("id") {
 
 		@Override
 		public TreeSet<CustomBook> sort(List<CustomBook> listToSort) {
@@ -23,7 +23,7 @@ public enum CustomSort {
 		}
 	},
 
-	BY_NAME {
+	BY_NAME("name") {
 
 		@Override
 		public TreeSet<CustomBook> sort(List<CustomBook> listToSort) {
@@ -32,7 +32,7 @@ public enum CustomSort {
 		}
 	},
 
-	BY_AUTHOR {
+	BY_AUTHOR("author") {
 
 		@Override
 		public TreeSet<CustomBook> sort(List<CustomBook> listToSort) {
@@ -41,7 +41,7 @@ public enum CustomSort {
 		}
 	},
 
-	BY_GENRE {
+	BY_GENRE("genre") {
 
 		@Override
 		public TreeSet<CustomBook> sort(List<CustomBook> listToSort) {
@@ -50,7 +50,7 @@ public enum CustomSort {
 		}
 	},
 
-	BY_DATE {
+	BY_DATE("date") {
 
 		@Override
 		public TreeSet<CustomBook> sort(List<CustomBook> listToSort) {
@@ -59,7 +59,7 @@ public enum CustomSort {
 		}
 	},
 
-	BY_PUBLISHING_HOUSE {
+	BY_PUBLISHING_HOUSE("publisher") {
 
 		@Override
 		public TreeSet<CustomBook> sort(List<CustomBook> listToSort) {
@@ -67,6 +67,18 @@ public enum CustomSort {
 			return executeSorting(comp, listToSort);
 		}
 	};
+	
+	private String typeOfSorting;
+	
+	
+
+	public String getTypeOfSorting() {
+		return typeOfSorting;
+	}
+
+	private CustomSort(String typeOfSorting) {
+		this.typeOfSorting = typeOfSorting;
+	}
 
 	public abstract TreeSet<CustomBook> sort(List<CustomBook> listToSort);
 

@@ -1,8 +1,8 @@
-package by.svirski.lesson6.model.comparator;
+package by.svirski.lesson6.model.comparators;
 
 import java.util.Comparator;
 
-import by.svirski.lesson6.model.entity.CustomBook;
+import by.svirski.lesson6.model.entities.CustomBook;
 
 public class PublishDateComparator implements Comparator<CustomBook>{
 

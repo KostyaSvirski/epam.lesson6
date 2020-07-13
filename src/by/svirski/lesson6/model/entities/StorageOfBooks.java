@@ -1,10 +1,10 @@
-package by.svirski.lesson6.model.entity;
+package by.svirski.lesson6.model.entities;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import by.svirski.lesson6.model.exception.CustomStorageException;
+import by.svirski.lesson6.model.exceptions.CustomStorageException;
 
 
 public class StorageOfBooks {

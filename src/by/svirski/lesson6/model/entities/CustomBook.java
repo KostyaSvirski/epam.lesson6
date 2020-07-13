@@ -1,4 +1,4 @@
-package by.svirski.lesson6.model.entity;
+package by.svirski.lesson6.model.entities;
 
 import java.util.Arrays;
 import java.util.Calendar;
