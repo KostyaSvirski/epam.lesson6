@@ -2,15 +2,15 @@ package by.svirski.lesson6.model.dao.impl;
 
 import java.util.List;
 
-import by.svirski.lesson6.model.creators.impl.BookCreatorImpl;
-import by.svirski.lesson6.model.creators.impl.StorageCreatorImpl;
+import by.svirski.lesson6.model.creator.impl.BookCreatorImpl;
+import by.svirski.lesson6.model.creator.impl.StorageCreatorImpl;
 import by.svirski.lesson6.model.dao.BookListDaoInter;
-import by.svirski.lesson6.model.entities.CustomBook;
-import by.svirski.lesson6.model.entities.StorageOfBooks;
-import by.svirski.lesson6.model.exceptions.CustomCreationException;
-import by.svirski.lesson6.model.exceptions.CustomDaoException;
-import by.svirski.lesson6.model.exceptions.CustomStorageException;
-import by.svirski.lesson6.model.exceptions.CustomValidationException;
+import by.svirski.lesson6.model.entity.CustomBook;
+import by.svirski.lesson6.model.entity.StorageOfBooks;
+import by.svirski.lesson6.model.exception.CustomCreationException;
+import by.svirski.lesson6.model.exception.CustomDaoException;
+import by.svirski.lesson6.model.exception.CustomStorageException;
+import by.svirski.lesson6.model.exception.CustomValidationException;
 
 public class BookListDaoImpl implements BookListDaoInter {
 

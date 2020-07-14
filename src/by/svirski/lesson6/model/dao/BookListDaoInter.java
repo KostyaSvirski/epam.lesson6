@@ -2,10 +2,10 @@ package by.svirski.lesson6.model.dao;
 
 import java.util.List;
 
-import by.svirski.lesson6.model.entities.CustomBook;
-import by.svirski.lesson6.model.entities.StorageOfBooks;
-import by.svirski.lesson6.model.exceptions.CustomDaoException;
-import by.svirski.lesson6.model.exceptions.CustomStorageException;
+import by.svirski.lesson6.model.entity.CustomBook;
+import by.svirski.lesson6.model.entity.StorageOfBooks;
+import by.svirski.lesson6.model.exception.CustomDaoException;
+import by.svirski.lesson6.model.exception.CustomStorageException;
 
 public interface BookListDaoInter {
 	

@@ -1,6 +1,6 @@
 package by.svirski.lesson6.model.parser.impl;
 
-import by.svirski.lesson6.model.exceptions.CustomParseException;
+import by.svirski.lesson6.model.exception.CustomParseException;
 import by.svirski.lesson6.model.parser.CustomParserInter;
 
 public class ParserNumberImpl implements CustomParserInter<Integer>{

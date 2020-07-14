@@ -3,7 +3,7 @@ package by.svirski.lesson6.model.parser.impl;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import by.svirski.lesson6.model.exceptions.CustomParseException;
+import by.svirski.lesson6.model.exception.CustomParseException;
 import by.svirski.lesson6.model.parser.CustomParserInter;
 
 public class ParserDateImpl implements CustomParserInter<Calendar>{
