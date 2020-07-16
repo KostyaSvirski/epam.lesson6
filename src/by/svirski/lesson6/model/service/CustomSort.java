@@ -69,8 +69,6 @@ public enum CustomSort {
 	};
 	
 	private String typeOfSorting;
-	
-	
 
 	public String getTypeOfSorting() {
 		return typeOfSorting;

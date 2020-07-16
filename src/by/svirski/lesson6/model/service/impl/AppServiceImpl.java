@@ -7,9 +7,7 @@ import by.svirski.lesson6.model.dao.impl.BookListDaoImpl;
 import by.svirski.lesson6.model.entity.CustomBook;
 import by.svirski.lesson6.model.entity.StorageOfBooks;
 import by.svirski.lesson6.model.exception.CustomDaoException;
-import by.svirski.lesson6.model.exception.CustomParseException;
 import by.svirski.lesson6.model.exception.CustomServiceException;
-import by.svirski.lesson6.model.parser.impl.ParserNumberImpl;
 import by.svirski.lesson6.model.service.CustomServiceInter;
 import by.svirski.lesson6.model.service.CustomSort;
 import by.svirski.lesson6.model.validator.impl.ValidatorDateImpl;
@@ -63,59 +61,65 @@ public class AppServiceImpl implements CustomServiceInter {
 		}
 	}
 
-	//TODO 14.07.2020 18:42 parameters remove
 	@Override
-	public boolean removeBookById(int id) throws CustomServiceException {
-		BookListDaoImpl bookListDao = new BookListDaoImpl();
-		try {
-			return bookListDao.removeBookById(id);
-		} catch (CustomDaoException e) {
-			throw new CustomServiceException("error in dao: " + e.getMessage());
+	public boolean removeBook(String nameOfBook) throws CustomServiceException {
+		ValidatorStringsImpl validator = new ValidatorStringsImpl();
+		if (validator.validate(nameOfBook)) {
+			BookListDaoImpl bookListDao = new BookListDaoImpl();
+			List<CustomBook> listOfBooks;
+			try {
+				listOfBooks = bookListDao.sellectBookList();
+				for (CustomBook book : listOfBooks) {
+					if (book.getBookName().equalsIgnoreCase(nameOfBook)) {
+						try {
+							return bookListDao.removeBookById(book.getBookId());
+						} catch (CustomDaoException e) {
+							throw new CustomServiceException("error in dao: " + e.getMessage());
+						}
+					}
+				}
+			} catch (CustomDaoException e1) {
+				throw new CustomServiceException("error in dao: " + e1.getMessage());
+			}
 		}
+		return false;
 	}
-	
-	//TODO 13.07.2020 15:36 switch arguments to commands
+
 	@Override
 	public TreeSet<CustomBook> sortByTag(String typeOfSortingStr) throws CustomServiceException {
 		try {
 			ValidatorNumberImpl validator = new ValidatorNumberImpl();
-
-			ParserNumberImpl parser = new ParserNumberImpl();
-			int typeOfSorting;
-			try {
-				if (validator.validate(typeOfSortingStr)) {
-					typeOfSorting = parser.parse(typeOfSortingStr);
-				} else {
-					throw new CustomServiceException("error in validation");
-				}
-			} catch (CustomParseException e) {
-				throw new CustomServiceException("error in parsing: " + e.getMessage());
+			CustomSort typeOfSorting;
+			if (validator.validate(typeOfSortingStr)) {
+				typeOfSorting = CustomSort.valueOf(typeOfSortingStr);
+			} else {
+				throw new CustomServiceException("error in validation");
 			}
 			BookListDaoImpl bookListDao = new BookListDaoImpl();
 			List<CustomBook> listToSort = bookListDao.sellectBookList();
 			TreeSet<CustomBook> sortedList;
 			switch (typeOfSorting) {
-			case 1: {
+			case BY_ID: {
 				sortedList = CustomSort.BY_ID.sort(listToSort);
 				break;
 			}
-			case 2: {
+			case BY_NAME: {
 				sortedList = CustomSort.BY_NAME.sort(listToSort);
 				break;
 			}
-			case 3: {
+			case BY_AUTHOR: {
 				sortedList = CustomSort.BY_AUTHOR.sort(listToSort);
 				break;
 			}
-			case 4: {
+			case BY_GENRE: {
 				sortedList = CustomSort.BY_GENRE.sort(listToSort);
 				break;
 			}
-			case 5: {
+			case BY_DATE: {
 				sortedList = CustomSort.BY_DATE.sort(listToSort);
 				break;
 			}
-			case 6: {
+			case BY_PUBLISHING_HOUSE: {
 				sortedList = CustomSort.BY_PUBLISHING_HOUSE.sort(listToSort);
 				break;
 			}
@@ -128,11 +132,11 @@ public class AppServiceImpl implements CustomServiceInter {
 			throw new CustomServiceException("error in storage: " + e.getMessage());
 		}
 	}
-	
-	//TODO 13.07.2020 15:37 switch arguments to commands
+
+	// TODO 13.07.2020 15:37 switch arguments to commands
 	@Override
 	public List<CustomBook> findBookByTag(String tag) throws CustomServiceException {
-		//TODO 13.07.2020 15:40 find book by tag
+		// TODO 13.07.2020 15:40 find book by tag
 		return null;
 	}
 

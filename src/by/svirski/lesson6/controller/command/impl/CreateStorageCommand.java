@@ -14,9 +14,9 @@ public class CreateStorageCommand implements ActionCommand{
 		AppServiceImpl service = new AppServiceImpl();
 		try {
 			StorageOfBooks storage = service.createStorage(request);
-			response.setResultOfCommand(true);
+			response.setResultOfExecution(true);
 		} catch (CustomServiceException e) {
-			response.setResultOfCommand(false);
+			response.setError(true);
 		}
 		return response;
 	}

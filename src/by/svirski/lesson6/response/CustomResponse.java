@@ -7,20 +7,20 @@ import by.svirski.lesson6.model.entity.CustomBook;
 
 public class CustomResponse {
 
-	private String command;
 	private TreeSet<CustomBook> sortedList;
 	private List<CustomBook> listFound;
-	private boolean resultOfCommand;
+	private boolean isExecuted;
+	private boolean isError;
 
 	public CustomResponse() {
-		command = "";
 		sortedList = null;
 		listFound = null;
-		resultOfCommand = false;
+		isExecuted = false;
+		isError = false;
 	}
 
-	public void setCommand(String command) {
-		this.command = command;
+	public void setError(boolean isError) {
+		this.isError = isError;
 	}
 
 	public void setSortedList(TreeSet<CustomBook> sortedList) {
@@ -31,26 +31,28 @@ public class CustomResponse {
 		this.listFound = listFound;
 	}
 
-	public void setResultOfCommand(boolean resultOfCommand) {
-		this.resultOfCommand = resultOfCommand;
+	public void setResultOfExecution(boolean resultOfCommand) {
+		this.isExecuted = resultOfCommand;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("CustomResponse [command=");
-		builder.append(command);
+		builder.append("CustomResponse [");
 		if (sortedList != null) {
-			builder.append(", sortedList=");
+			builder.append(" sortedList=");
 			builder.append(sortedList);
 		}
 		if (listFound != null) {
-			builder.append(", listFound=");
+			builder.append(" listFound=");
 			builder.append(listFound);
 		}
-		if (resultOfCommand != false) {
-			builder.append(", resultOfCommand=");
-			builder.append(resultOfCommand);
+		if (isExecuted != false) {
+			builder.append(" resultOfCommand=");
+			builder.append(isExecuted);
+		}
+		if(isError != false) {
+			builder.append(" Error!");
 		}
 		builder.append("]");
 		return builder.toString();

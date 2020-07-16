@@ -10,16 +10,15 @@ import by.svirski.lesson6.response.CustomResponse;
 
 public class SortCommand implements ActionCommand{
 	
-	//TODO 14.07.2020 18:38 switch argument in service
 	@Override
 	public CustomResponse execute(String request) {
 		CustomResponse response = new CustomResponse();
 		AppServiceImpl service = new AppServiceImpl();
 		try {
-			TreeSet<CustomBook> sortedList = service.sortByTag("1");
+			TreeSet<CustomBook> sortedList = service.sortByTag(request);
 			response.setSortedList(sortedList);
 		} catch (CustomServiceException e) {
-			response.setSortedList(null);
+			response.setError(true);
 		}
 		return response;
 	}

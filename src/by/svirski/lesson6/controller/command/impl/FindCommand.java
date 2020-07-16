@@ -7,7 +7,7 @@ public class FindCommand implements ActionCommand{
 
 	@Override
 	public CustomResponse execute(String request) {
-		// TODO Auto-generated method stub
+		// TODO 16.07.2020 13:57 find book by request
 		return null;
 	}
 

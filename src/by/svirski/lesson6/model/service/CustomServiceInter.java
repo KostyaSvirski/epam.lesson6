@@ -13,7 +13,7 @@ public interface CustomServiceInter {
 
 	boolean addBook(String... parameters) throws CustomServiceException;
 
-	boolean removeBookById(int id) throws CustomServiceException;
+	boolean removeBook(String id) throws CustomServiceException;
 
 	TreeSet<CustomBook> sortByTag(String typeOfSorting) throws CustomServiceException, CustomValidationException;
 

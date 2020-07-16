@@ -13,9 +13,9 @@ public class AddCommand implements ActionCommand{
 		AppServiceImpl service = new AppServiceImpl();
 		try {
 			boolean result = service.addBook(request.split(" "));
-			response.setResultOfCommand(result);
+			response.setResultOfExecution(result);
 		} catch (CustomServiceException e) {
-			response.setResultOfCommand(false);
+			response.setError(true);
 		}
 		return response;
 	}

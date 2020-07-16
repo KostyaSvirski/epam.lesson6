@@ -5,9 +5,11 @@ import by.svirski.lesson6.controller.command.impl.AddCommand;
 import by.svirski.lesson6.controller.command.impl.FindCommand;
 import by.svirski.lesson6.controller.command.impl.RemoveCommand;
 import by.svirski.lesson6.controller.command.impl.SortCommand;
+import by.svirski.lesson6.controller.command.impl.CreateStorageCommand;
 
 public enum TypeOfCommand {
 	
+	CREATE_STORAGE(new CreateStorageCommand()),
 	ADD_COMMAND(new AddCommand()),
 	REMOVE_COMMANAD(new SortCommand()),
 	SORT_COMMAND(new RemoveCommand()),
