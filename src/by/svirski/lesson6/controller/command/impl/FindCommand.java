@@ -12,7 +12,7 @@ public class FindCommand implements ActionCommand{
 
 	@Override
 	public CustomResponse execute(String request) {
-		String[] parsedRequest = request.split(" ");
+		String[] parsedRequest = request.split(" ", 2);
 		CustomResponse response = new CustomResponse();
 		AppServiceImpl service = new AppServiceImpl();
 		try {

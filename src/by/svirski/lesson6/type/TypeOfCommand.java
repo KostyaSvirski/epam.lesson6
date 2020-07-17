@@ -2,10 +2,10 @@ package by.svirski.lesson6.type;
 
 import by.svirski.lesson6.controller.command.ActionCommand;
 import by.svirski.lesson6.controller.command.impl.AddCommand;
+import by.svirski.lesson6.controller.command.impl.CreateStorageCommand;
 import by.svirski.lesson6.controller.command.impl.FindCommand;
 import by.svirski.lesson6.controller.command.impl.RemoveCommand;
 import by.svirski.lesson6.controller.command.impl.SortCommand;
-import by.svirski.lesson6.controller.command.impl.CreateStorageCommand;
 
 public enum TypeOfCommand {
 	

@@ -1,6 +1,5 @@
 package by.svirski.lesson6.model.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -101,35 +100,15 @@ public class AppServiceImpl implements CustomServiceInter {
 			BookListDaoImpl bookListDao = new BookListDaoImpl();
 			List<CustomBook> listToSort = bookListDao.sellectBookList();
 			TreeSet<CustomBook> sortedList;
-			switch (typeOfSorting) {
-				case BY_ID: {
-					sortedList = CustomSort.BY_ID.sort(listToSort);
-					break;
-				}
-				case BY_NAME: {
-					sortedList = CustomSort.BY_NAME.sort(listToSort);
-					break;
-				}
-				case BY_AUTHOR: {
-					sortedList = CustomSort.BY_AUTHOR.sort(listToSort);
-					break;
-				}
-				case BY_GENRE: {
-					sortedList = CustomSort.BY_GENRE.sort(listToSort);
-					break;
-				}
-				case BY_DATE: {
-					sortedList = CustomSort.BY_DATE.sort(listToSort);
-					break;
-				}
-				case BY_PUBLISHING_HOUSE: {
-					sortedList = CustomSort.BY_PUBLISHING_HOUSE.sort(listToSort);
-					break;
-				}
-				default: {
-					throw new CustomServiceException("not valid type of sorting");
-				}
-			}
+			sortedList = switch (typeOfSorting) {
+				case BY_ID -> CustomSort.BY_ID.sort(listToSort);
+				case BY_NAME -> CustomSort.BY_NAME.sort(listToSort);
+				case BY_AUTHOR -> CustomSort.BY_AUTHOR.sort(listToSort);
+				case BY_GENRE -> CustomSort.BY_GENRE.sort(listToSort);
+				case BY_DATE -> CustomSort.BY_DATE.sort(listToSort);
+				case BY_PUBLISHING_HOUSE -> CustomSort.BY_PUBLISHING_HOUSE.sort(listToSort);
+				default -> throw new CustomServiceException("not valid type of sorting");
+			};
 			return sortedList;
 		} catch (CustomDaoException e) {
 			throw new CustomServiceException("error in storage: " + e.getMessage());
@@ -148,32 +127,15 @@ public class AppServiceImpl implements CustomServiceInter {
 			}
 			BookListDaoImpl bookList = new BookListDaoImpl();
 			List<CustomBook> listToCheck = bookList.sellectBookList();
-			List<CustomBook> foundList = new ArrayList<CustomBook>();
-			switch (typeOfSelection) {
-				case BY_AUTHOR: {
-					foundList = CustomSelect.BY_AUTHOR.exectuteSelection(listToCheck, parameter);
-					break;
-				}
-				case BY_NAME: {
-					foundList = CustomSelect.BY_NAME.exectuteSelection(listToCheck, parameter);
-					break;
-				}
-				case BY_GENRE: {
-					foundList = CustomSelect.BY_GENRE.exectuteSelection(listToCheck, parameter);
-					break;
-				}
-				case BY_DATE: {
-					foundList = CustomSelect.BY_DATE.exectuteSelection(listToCheck, parameter);
-					break;
-				}
-				case BY_PUBLISHING_HOUSE: {
-					foundList = CustomSelect.BY_PUBLISHING_HOUSE.exectuteSelection(listToCheck, parameter);
-					break;
-				}
-				default: {
-					throw new CustomServiceException("not valid type of sorting");
-				}
-			}
+			List<CustomBook> foundList;
+			foundList = switch (typeOfSelection) {
+				case BY_AUTHOR -> CustomSelect.BY_AUTHOR.exectuteSelection(listToCheck, parameter);
+				case BY_NAME -> CustomSelect.BY_NAME.exectuteSelection(listToCheck, parameter);
+				case BY_GENRE -> CustomSelect.BY_GENRE.exectuteSelection(listToCheck, parameter);
+				case BY_DATE -> CustomSelect.BY_DATE.exectuteSelection(listToCheck, parameter);
+				case BY_PUBLISHING_HOUSE -> CustomSelect.BY_PUBLISHING_HOUSE.exectuteSelection(listToCheck, parameter);
+				default -> throw new CustomServiceException("not valid type of sorting");
+			};
 			return foundList;
 		} catch (CustomDaoException | CustomSelectionException e) {
 			throw new CustomServiceException("error in storage: " + e.getMessage());
