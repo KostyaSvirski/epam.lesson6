@@ -1,5 +1,6 @@
 package by.svirski.lesson6.model.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -7,7 +8,9 @@ import by.svirski.lesson6.model.dao.impl.BookListDaoImpl;
 import by.svirski.lesson6.model.entity.CustomBook;
 import by.svirski.lesson6.model.entity.StorageOfBooks;
 import by.svirski.lesson6.model.exception.CustomDaoException;
+import by.svirski.lesson6.model.exception.CustomSelectionException;
 import by.svirski.lesson6.model.exception.CustomServiceException;
+import by.svirski.lesson6.model.service.CustomSelect;
 import by.svirski.lesson6.model.service.CustomServiceInter;
 import by.svirski.lesson6.model.service.CustomSort;
 import by.svirski.lesson6.model.validator.impl.ValidatorDateImpl;
@@ -88,7 +91,7 @@ public class AppServiceImpl implements CustomServiceInter {
 	@Override
 	public TreeSet<CustomBook> sortByTag(String typeOfSortingStr) throws CustomServiceException {
 		try {
-			ValidatorNumberImpl validator = new ValidatorNumberImpl();
+			ValidatorStringsImpl validator = new ValidatorStringsImpl();
 			CustomSort typeOfSorting;
 			if (validator.validate(typeOfSortingStr)) {
 				typeOfSorting = CustomSort.valueOf(typeOfSortingStr);
@@ -99,33 +102,33 @@ public class AppServiceImpl implements CustomServiceInter {
 			List<CustomBook> listToSort = bookListDao.sellectBookList();
 			TreeSet<CustomBook> sortedList;
 			switch (typeOfSorting) {
-			case BY_ID: {
-				sortedList = CustomSort.BY_ID.sort(listToSort);
-				break;
-			}
-			case BY_NAME: {
-				sortedList = CustomSort.BY_NAME.sort(listToSort);
-				break;
-			}
-			case BY_AUTHOR: {
-				sortedList = CustomSort.BY_AUTHOR.sort(listToSort);
-				break;
-			}
-			case BY_GENRE: {
-				sortedList = CustomSort.BY_GENRE.sort(listToSort);
-				break;
-			}
-			case BY_DATE: {
-				sortedList = CustomSort.BY_DATE.sort(listToSort);
-				break;
-			}
-			case BY_PUBLISHING_HOUSE: {
-				sortedList = CustomSort.BY_PUBLISHING_HOUSE.sort(listToSort);
-				break;
-			}
-			default: {
-				throw new CustomServiceException("not valid type of sorting");
-			}
+				case BY_ID: {
+					sortedList = CustomSort.BY_ID.sort(listToSort);
+					break;
+				}
+				case BY_NAME: {
+					sortedList = CustomSort.BY_NAME.sort(listToSort);
+					break;
+				}
+				case BY_AUTHOR: {
+					sortedList = CustomSort.BY_AUTHOR.sort(listToSort);
+					break;
+				}
+				case BY_GENRE: {
+					sortedList = CustomSort.BY_GENRE.sort(listToSort);
+					break;
+				}
+				case BY_DATE: {
+					sortedList = CustomSort.BY_DATE.sort(listToSort);
+					break;
+				}
+				case BY_PUBLISHING_HOUSE: {
+					sortedList = CustomSort.BY_PUBLISHING_HOUSE.sort(listToSort);
+					break;
+				}
+				default: {
+					throw new CustomServiceException("not valid type of sorting");
+				}
 			}
 			return sortedList;
 		} catch (CustomDaoException e) {
@@ -133,11 +136,48 @@ public class AppServiceImpl implements CustomServiceInter {
 		}
 	}
 
-	// TODO 13.07.2020 15:37 switch arguments to commands
 	@Override
-	public List<CustomBook> findBookByTag(String tag) throws CustomServiceException {
-		// TODO 13.07.2020 15:40 find book by tag
-		return null;
+	public List<CustomBook> findBookByTag(String tag, String parameter) throws CustomServiceException {
+		try {
+			ValidatorStringsImpl validator = new ValidatorStringsImpl();
+			CustomSelect typeOfSelection;
+			if (validator.validate(tag)) {
+				typeOfSelection = CustomSelect.valueOf(tag);
+			} else {
+				throw new CustomServiceException("error in validation");
+			}
+			BookListDaoImpl bookList = new BookListDaoImpl();
+			List<CustomBook> listToCheck = bookList.sellectBookList();
+			List<CustomBook> foundList = new ArrayList<CustomBook>();
+			switch (typeOfSelection) {
+				case BY_AUTHOR: {
+					foundList = CustomSelect.BY_AUTHOR.exectuteSelection(listToCheck, parameter);
+					break;
+				}
+				case BY_NAME: {
+					foundList = CustomSelect.BY_NAME.exectuteSelection(listToCheck, parameter);
+					break;
+				}
+				case BY_GENRE: {
+					foundList = CustomSelect.BY_GENRE.exectuteSelection(listToCheck, parameter);
+					break;
+				}
+				case BY_DATE: {
+					foundList = CustomSelect.BY_DATE.exectuteSelection(listToCheck, parameter);
+					break;
+				}
+				case BY_PUBLISHING_HOUSE: {
+					foundList = CustomSelect.BY_PUBLISHING_HOUSE.exectuteSelection(listToCheck, parameter);
+					break;
+				}
+				default: {
+					throw new CustomServiceException("not valid type of sorting");
+				}
+			}
+			return foundList;
+		} catch (CustomDaoException | CustomSelectionException e) {
+			throw new CustomServiceException("error in storage: " + e.getMessage());
+		}
 	}
 
 }

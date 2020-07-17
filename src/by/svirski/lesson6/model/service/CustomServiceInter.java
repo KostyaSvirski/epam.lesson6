@@ -17,5 +17,5 @@ public interface CustomServiceInter {
 
 	TreeSet<CustomBook> sortByTag(String typeOfSorting) throws CustomServiceException, CustomValidationException;
 
-	List<CustomBook> findBookByTag(String tagToFind) throws CustomServiceException;
+	List<CustomBook> findBookByTag(String tagToFind, String parameter) throws CustomServiceException;
 }
